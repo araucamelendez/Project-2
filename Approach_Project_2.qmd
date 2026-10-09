@@ -1,0 +1,62 @@
+---
+title: "Project 2: Untidy Data"
+author: "Arauca Melendez"
+format: html
+execute:
+  echo: true
+  warning: false
+---
+
+# Introduction
+
+The purpose of this project is to practice working with wide-format data and preparing it for analysis using R. Three different datasets were selected and transformed from their original wide structures into tidy formats. The datasets cover different topics, including COVID-19 hospitalizations in New York City, adults with asthma in New York City, and population estimates for the ten most populated states in the United States.
+
+For each dataset, the original information was first preserved in a raw wide-format file. The data were then imported into R and cleaned using the tidyr and dplyr packages. The transformation process included reshaping the data from wide to long format, renaming variables, addressing missing or inconsistent values, and organizing the variables into a consistent structure. After the data were tidied, the requested analysis for each dataset was performed using only the resulting tidy data.
+
+The goal of the project is not only to produce the final analysis, but also to show a reproducible process for taking raw data and preparing it for downstream analysis.
+
+# Approach
+
+Each dataset was handled independently so that the transformation and analysis of one dataset did not affect the others. The first step for each dataset was to create a raw CSV file that preserved the original wide-format structure. These raw files were committed to the GitHub repository before the transformation process began.
+
+The raw datasets were imported into R using read.csv(). The structure of each dataset was examined before any transformations were made by reviewing the column names, dimensions, data types, and sample rows. The pivot_longer() function from the tidyr package was then used to reshape the appropriate columns from wide format into long format. The dplyr package was used to rename variables, organize the data, and address missing or inconsistent values when necessary.
+
+After each dataset was converted to a tidy format, the resulting data were used for the analysis associated with that dataset. Summary tables and visualizations were created where appropriate, and the results were interpreted based on the values observed in the tidy data. This process was repeated separately for all three datasets to maintain a clear and reproducible workflow.
+
+# Process
+
+## Loading the data 
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+```
+```{r}
+raw_covid <- read.csv("C:/Users/SPS Student/Downloads/covid_hospitalizations_wide.csv")
+```
+
+### Checking my data
+
+To ensure my data was uploaded correctly and R is processing it correctly, I went ahead and ran the four following commands:
+
+```{r}
+head(raw_covid)
+```
+```{r}
+str(raw_covid)
+```
+```{r}
+dim(raw_covid)
+```
+```{r}
+names(raw_covid)
+```
+
+## Dataset 1: NYC COVID-19 Hospitalizations
+
+### Data Source
+
+The first dataset comes from the New York City Department of Health and Mental Hygiene. The dataset summarizes COVID-19 hospitalizations among confirmed COVID-19 cases in New York City. The report includes hospitalization information by age group, sex, and borough. The data in the report reflect information available through April 26, 2020 at 6:00 PM.
+
+The original data were provided as a PDF report. The relevant tables were manually converted into a CSV file while maintaining a wide-format structure for use in the data tidying process.
+
